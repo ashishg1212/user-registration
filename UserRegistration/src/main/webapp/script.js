@@ -9,7 +9,5 @@ function validateForm() {
         alert('All fields are required!');
         return false;
     }
-
-    // Optional: Add more specific validation logic if needed (e.g., email format, phone number format)
     return true;
 }
