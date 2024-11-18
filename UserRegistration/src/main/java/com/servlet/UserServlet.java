@@ -30,9 +30,9 @@ public class UserServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             // Establish the database connection
-            String dbURL = "jdbc:mysql://localhost:3306/user_registration";
-            String dbUser = "root";
-            String dbPassword = "root";
+            String dbURL = "jdbc:mysql://localhost:3306/your_db_name";
+            String dbUser = "your_username";
+            String dbPassword = "your_password";
             connection = DriverManager.getConnection(dbURL, dbUser, dbPassword);
         } catch (ClassNotFoundException e) {
             throw new ServletException("MySQL Driver not found.", e);
@@ -50,15 +50,12 @@ public class UserServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String phone = request.getParameter("phone");
 
-        // Validate input (basic validation)
         if (name == null || email == null || dob == null || gender == null || phone == null) {
             request.setAttribute("errorMessage", "All fields are required!");
             RequestDispatcher dispatcher = request.getRequestDispatcher(ERROR_PAGE);
             dispatcher.forward(request, response);
             return;
         }
-
-        // Create User object
         User user = new User();
         user.setName(name);
         user.setEmail(email);
@@ -91,7 +88,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    // Close database connection when servlet is destroyed
+    // Close database connection
     @Override
     public void destroy() {
         try {
